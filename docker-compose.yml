@@ -1,0 +1,21 @@
+version: "3.8"
+#https://github.com/compose-spec/compose-spec/blob/master/spec.md#using-extensions-as-fragments
+
+services:
+  mysql:
+    image: mysql:8.3.0
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: music_school
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    command: --default-authentication-plugin=mysql_native_password --secure-file-priv=/var/lib/mysql-files
+    volumes:
+      - mysql-db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql-db:
+    name: mysql_db
